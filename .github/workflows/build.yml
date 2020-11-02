@@ -23,9 +23,21 @@ jobs:
       - uses: actions/checkout@v2
 
       # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
+      - name: Build
         run: |
           pip install sphinx
           pip install solar-theme
           cd docs
           .\make.bat html
+      - name: Publish
+        if: github.ref == 'ref/head/master'
+        uses: cpina/github-action-push-to-another-repository@v1.1
+        with:
+          # Source directory from the origin directory
+          source-directory: docs/build
+          # Name of the destination username/organization
+          destination-github-username: fabienfl-orc
+          # Destination repository
+          destination-repository-name: dfir-orc.github.io.git
+          # Email for the git commit
+          user-email: fabien.fl-orc@ssi.gouv.fr
