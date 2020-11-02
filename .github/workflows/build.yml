@@ -35,7 +35,7 @@ jobs:
         env:
           API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
         run: |
-          git clone --single-branch --branch master "https://$API_TOKEN_GITHUB@github.com/fabienfl-orc/dfir-orc.github.io.git"
+          git clone --single-branch --branch master "https://$ENV:API_TOKEN_GITHUB@github.com/fabienfl-orc/dfir-orc.github.io.git"
           Copy-Item -Force -Recurse .\docs\build\html\* dfir-orc.github.io/
           cd dfir-orc.github.io/
           git add --all
