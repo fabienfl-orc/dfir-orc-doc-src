@@ -24,20 +24,18 @@ jobs:
 
       # Runs a set of commands using the runners shell
       - name: Build
+        shell: powershell
         run: |
           pip install sphinx
           pip install solar-theme
-          cd docs
-          .\make.bat html
+          .\docs\make.bat html
       - name: Publish
         if: github.ref == 'refs/heads/master'
-        uses: cpina/github-action-push-to-another-repository@v1.1
-        with:
-          # Source directory from the origin directory
-          source-directory: docs/build
-          # Name of the destination username/organization
-          destination-github-username: fabienfl-orc
-          # Destination repository
-          destination-repository-name: dfir-orc.github.io.git
-          # Email for the git commit
-          user-email: fabien.fl-orc@ssi.gouv.fr
+        shell: powershell
+        run: |
+          git clone https://github.com/fabienfl-orc/dfir-orc.github.io.git
+          Copy-Item -Recurse .\docs\build\html\* dfir-orc.github.io/
+          cd dfir-orc.github.io/
+          git add --all
+          git -c "user.name=fabienfl" -c "user.email=fabien.fl-orc@ssi.gouv.fr" commit -m "Update by GitHub Action"
+          git push
