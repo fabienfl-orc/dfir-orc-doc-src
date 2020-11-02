@@ -33,9 +33,10 @@ jobs:
         if: github.ref == 'refs/heads/master'
         shell: powershell
         run: |
-          git clone https://github.com/fabienfl-orc/dfir-orc.github.io.git
+          git clone --single-branch --branch master https://$API_TOKEN_GITHUB@github.com/fabienfl-orc/dfir-orc.github.io.git
           Copy-Item -Force -Recurse .\docs\build\html\* dfir-orc.github.io/
           cd dfir-orc.github.io/
           git add --all
-          git -c "user.name=fabienfl" -c "user.email=fabien.fl-orc@ssi.gouv.fr" commit -m "Update by GitHub Action"
+          git status
+          git -c "user.name=fabienfl" -c "user.email=fabien.fl-orc@ssi.gouv.fr" commit -m "Update by GitHub Action"          
           git push
