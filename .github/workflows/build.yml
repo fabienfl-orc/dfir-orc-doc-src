@@ -30,7 +30,7 @@ jobs:
           cd docs
           .\make.bat html
       - name: Publish
-        if: github.ref == 'ref/head/master'
+        if: github.ref == 'refs/heads/master'
         uses: cpina/github-action-push-to-another-repository@v1.1
         with:
           # Source directory from the origin directory
