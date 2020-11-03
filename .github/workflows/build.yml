@@ -28,5 +28,5 @@ jobs:
           cd dfir-orc.github.io/
           git add --all
           git status
-          git -c "user.name=fabienfl" -c "user.email=fabien.fl-orc@ssi.gouv.fr" commit -m "Update by GitHub Action"          
+          git -c "user.name=dfir-orc-bot" -c "user.email=73876579+dfir-orc-bot@users.noreply.github.com" commit -m "Update by GitHub Action"
           git push
